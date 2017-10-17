@@ -22,6 +22,9 @@ public class Deck {
 
 	/**
 	 * Constructor with one arg which creates and then shuffles the Deck
+	 * 
+	 * @param sort
+	 *            whether the Deck should be shuffled or not
 	 */
 
 	public Deck(boolean sort) {
