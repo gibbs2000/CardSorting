@@ -24,6 +24,8 @@ public class DeckTester {
 
 		// Tests mergeSort
 		out.println("Now testing mergeSort on d2");
+		out.println("d2 should now be random: ");
+		out.println(d2);
 		d2.mergeSort();
 		out.println("d2 should now be sorted: ");
 		out.println(d2);
@@ -51,7 +53,7 @@ public class DeckTester {
 		out.println("Prints the remaining Cards in d1\n" + d1); // should be almost full as only 1 card has been removed
 
 		for (int i = 0; i < DeckConstants.TOTAL_CARDS - 2; i++) {
-			// Tests pick by removing and printing all the cards from d1
+			// Tests pick by removing and printing all the remaining cards from d1
 			out.println(d1.pick());
 		}
 		out.println("Prints the remaining Cards in d1\n" + d1); // should be empty as all cards have been removed
@@ -70,6 +72,12 @@ public class DeckTester {
 		out.println(warGame[1]);
 		out.println("Here are the remaining cards in d1 ");
 		out.println(d1);
+
+		// The next two lines of code intentionally throw an error message for testing
+		// purposes - they ask for more cards beyond what d1 has left, please remove
+		// comments if you want to see my code intentionally break
+		// Deck[] goFish = d1.deal(3, 6);
+		// out.println(goFish);
 
 		// Tests mergeSort and selectionSort on the smaller dealt hands
 		out.println("Here is the first hand sorted using mergeSort");

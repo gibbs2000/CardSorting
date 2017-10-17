@@ -37,9 +37,12 @@ public class Deck {
 	 *            the Deck to be copied
 	 */
 	public Deck(Deck o) {
-		this.cards = o.getCards();
 		this.topCard = o.getTopCard();
 		o.sorted = o.getSorted();
+		cards = new Card[o.getCards().length];
+		for (int i = 0; i < cards.length; i++) {
+			cards[i] = new Card(o.getCard(i));
+		}
 
 	}
 
@@ -122,6 +125,16 @@ public class Deck {
 	public int getTopCard() {
 		return topCard;
 
+	}
+
+	/**
+	 * Sets the topCard of the Deck
+	 * 
+	 * @param topCard2
+	 *            the new value for the topCard
+	 */
+	public void setTopCard(int topCard2) {
+		topCard = topCard2;
 	}
 
 	/**
@@ -236,19 +249,24 @@ public class Deck {
 	 * @return an Array of Decks, each with a specific number of cards per hand
 	 */
 	public Deck[] deal(int numHands, int numPerHand) {
+
 		Deck[] hands = new Deck[numHands];
 		for (int i = 0; i < numHands; i++) {
 			Deck temp = new Deck();
 			temp.cards = new Card[numPerHand];
 			temp.sorted = false;
 			for (int j = 0; j < numPerHand; j++) {
-				temp.cards[j] = this.removeCard(topCard);
+				if (this.getTopCard() <= 0) {
+					throw new IllegalArgumentException("Not enough cards to deal the request number of hands");
+				}
+				temp.cards[j] = this.removeCard(getTopCard());
 			}
 			hands[i] = temp;
 			hands[i].topCard = temp.cards.length - 1;
 		}
 
 		return hands;
+
 	}
 
 	/********************************************************
@@ -284,12 +302,16 @@ public class Deck {
 
 	}
 
-	// Sorts a[0], ..., a[a.length-1] in ascending order
-	// using the Mergesort algorithm.
-	private static void sort(Card[] a) {
-		int n = a.length;
+	/**
+	 * Helper method that first calls the recursiveSort method
+	 * 
+	 * @param c
+	 *            the array to be sorted
+	 */
+	private static void sort(Card[] c) {
+		int n = c.length;
 		temp = new Card[n];
-		recursiveSort(a, 0, n - 1);
+		recursiveSort(c, 0, n - 1);
 	}
 
 	/**
